@@ -13,14 +13,16 @@ const Cart = (props) => {
   );
 
   return (
-    <Modal>
+    <Modal onDismiss={props.onDismiss}>
       {cartItems}
       <div className={style.total}>
         <span>Total Amount</span>
         <span>35.62</span>
       </div>
       <div className={style.actions}>
-        <button className={style["button--alt"]}>Close</button>
+        <button className={style["button--alt"]} onClick={props.onDismiss}>
+          Close
+        </button>
         <button className={style.button}>Order</button>
       </div>
     </Modal>
