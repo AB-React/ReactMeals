@@ -10,8 +10,26 @@ const HeaderCartButton = (props) => {
     return curNumber + item.quantity;
   }, 0);
 
+  const [cartIsBumped, setCartIsBumped] = React.useState(false);
+  const btnClasses = `${style.button} ${cartIsBumped ? style.bump : ""}`;
+  const { items } = CartCtx;
+  React.useEffect(() => {
+    if (items.length <= 0) {
+      return;
+    }
+
+    setCartIsBumped(true);
+    const timer = setTimeout(() => {
+      setCartIsBumped(false);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [items]);
+
   return (
-    <button className={style.button} onClick={props.onClick}>
+    <button className={btnClasses} onClick={props.onClick}>
       <span className={style.icon}>
         <CartIcon />
       </span>
