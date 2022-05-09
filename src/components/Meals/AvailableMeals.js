@@ -15,14 +15,13 @@ const AvailableMeals = () => {
       axios
         .get("https://alybadawy-8b6ed-default-rtdb.firebaseio.com/meals.json")
         .then((res) => {
-          const responseData = res.data;
           const loadedMeals = [];
-          for (const key in responseData) {
+          for (const mealId in res.data) {
             loadedMeals.push({
-              id: key,
-              name: responseData[key].name,
-              description: responseData[key].description,
-              price: responseData[key].price,
+              id: mealId,
+              name: res.data[mealId].name,
+              description: res.data[mealId].description,
+              price: res.data[mealId].price,
             });
           }
           setMeals(loadedMeals);
